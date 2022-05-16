@@ -22,5 +22,13 @@ namespace ContactDeneme.Business.Abstract
         Task<List<Contact>> GetMyContacts(string userid);
 
         Task<List<Contact>> GetMyContactsWithInfo(string userid);
+
+        Task<List<int>> getReports();
+
+        Task<int> getCountMax(int region);
+
+        Task<List<Contact>> getTelephoneCount(int region);
+
+
     }
 }

@@ -39,6 +39,11 @@ namespace ContactDeneme.Business.Concrete
             return await _unitOfWork.Contacts.GetById(id);
         }
 
+        public async Task<int> getCountMax(int region)
+        {
+            return await _unitOfWork.Contacts.getCountMax(region);
+        }
+
         public async Task<List<Contact>> GetMyContacts(string userid)
         {
             return await _unitOfWork.Contacts.getMyContacts(userid);
@@ -47,6 +52,16 @@ namespace ContactDeneme.Business.Concrete
         public async Task<List<Contact>> GetMyContactsWithInfo(string userid)
         {
             return await _unitOfWork.Contacts.getMyContactsWithInfo(userid);
+        }
+
+        public async Task<List<int>> getReports()
+        {
+            return await _unitOfWork.Contacts.getReports();
+        }
+
+        public async Task<List<Contact>> getTelephoneCount(int region)
+        {
+            return await _unitOfWork.Contacts.getTelephoneCount(region);
         }
 
         public void Update(Contact entity)

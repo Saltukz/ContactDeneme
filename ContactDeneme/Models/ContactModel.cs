@@ -17,6 +17,25 @@ namespace ContactDeneme.Models
         public int RegionId { get; set; }
 
         
+        
+    }
+
+
+    public class ContactModelWithInfo
+    {
+
+        [Required]
+        public string Name { get; set; } = null!;
+        [Required]
+        public string Surname { get; set; } = null!;
+        [Required]
+        public string Company { get; set; } = null!;
+
+        [Required]
+        public int RegionId { get; set; }
+
+
         public ContactInfoModel contactinfoModel { get; set; }
+
     }
 }

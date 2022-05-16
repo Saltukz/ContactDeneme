@@ -15,5 +15,10 @@ namespace ContactDeneme.Data.Abstract
 
        Task<List<Contact>> getMyContactsWithInfo(string userid);
 
+
+        Task<List<int>> getReports();
+
+        Task<int> getCountMax(int region);
+        Task<List<Contact>> getTelephoneCount(int region);
     }
 }

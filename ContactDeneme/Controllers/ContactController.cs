@@ -33,8 +33,8 @@ namespace ContactDeneme.Controllers
         
         }
 
-
-        [HttpPost("create")]
+      
+        [HttpPost("createNewContact")]
         
         public IActionResult CreateContact([FromBody] ContactModel model)
         {
@@ -250,11 +250,11 @@ namespace ContactDeneme.Controllers
                 var cachedDataString = Encoding.UTF8.GetString(cachedData);
                 var cachedContacts = JsonSerializer.Deserialize<List<Contact>>(cachedDataString);
 
-                List<ContactModel> cachedresponseLists = new List<ContactModel>();
+                List<ContactModelWithInfo> cachedresponseLists = new List<ContactModelWithInfo>();
 
                 foreach (Contact contact in cachedContacts)
                 {
-                    cachedresponseLists.Add(new ContactModel
+                    cachedresponseLists.Add(new ContactModelWithInfo
                     {
                         Company = contact.Company,
                         Name = contact.Name,
@@ -276,10 +276,10 @@ namespace ContactDeneme.Controllers
             {
                 List<Contact> contacts = await _contactService.GetMyContactsWithInfo(userid);
 
-                List<ContactModel> responseLists = new List<ContactModel>();
+                List<ContactModelWithInfo> responseLists = new List<ContactModelWithInfo>();
                 foreach (Contact contact in contacts)
                 {
-                    responseLists.Add(new ContactModel
+                    responseLists.Add(new ContactModelWithInfo
                     {
                         Company = contact.Company,
                         Name = contact.Name,
@@ -301,6 +301,27 @@ namespace ContactDeneme.Controllers
 
 
 
+        }
+
+
+        [HttpGet("getreports")]
+        public async Task<IActionResult> getReports()
+        {
+            var sonuc = await _contactService.getReports();
+
+            var countContacts = await _contactService.getCountMax(sonuc[0]);
+
+            var telephoneCount = await _contactService.getTelephoneCount(sonuc[0]);
+
+
+            var model = new ReportModel
+            {
+                RegionList = sonuc,
+                Count = countContacts,
+                telephoneCount = telephoneCount.Count
+            };
+
+            return Ok(model);
         }
     }
 
